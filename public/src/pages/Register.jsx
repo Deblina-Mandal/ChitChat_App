@@ -15,7 +15,13 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
-
+  const toastOptions = {
+    position:"bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme:"dark",
+};
   const handleSubmit = async (event) => {
     event.preventDefault();
     // console.log(handleValidation());
@@ -28,13 +34,7 @@ function Register() {
         password,
       });
       if (data.status===false){
-        toast.error(data.msg, {
-          position:"bottom-right",
-          autoClose: 8000,
-          pauseOnHover: true,
-          draggable: true,
-          theme:"dark",
-      })
+        toast.error(data.msg,toastOptions)
       }
       if (data.status===true){
         localStorage.setItem('chat-app-user',JSON.stringify(data.user));
