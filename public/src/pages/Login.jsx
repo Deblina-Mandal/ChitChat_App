@@ -20,6 +20,13 @@ function Login() {
     draggable: true,
     theme:"dark",
 };
+
+useEffect(() => {
+   if(localStorage.getItem('chat-app-user')){
+    navigate("/");
+   }
+}, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     // console.log(handleValidation());
@@ -55,16 +62,6 @@ function Login() {
       return false;
     }
 
-    if (confirmPassword === "") {
-      toast.error("Confirm password is required.", {
-        position: "bottom-right",
-        autoClose: 8000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
-      return false;
-    }
     if (username === "") {
       toast.error("Username is required.", {
         position: "bottom-right",
