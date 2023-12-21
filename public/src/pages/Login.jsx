@@ -33,7 +33,7 @@ function Login() {
       });
   
       if (data.status === false) {
-        // Incorrect password handling, for example, showing an error toast
+        // Incorrect password handling, for example, showing an error of toast
         toast.error(data.msg, toastOptions);
       }
   
