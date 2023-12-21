@@ -21,88 +21,47 @@ function Login() {
     theme:"dark",
 };
 
-useEffect(() => {
-   if(localStorage.getItem('chat-app-user')){
-    navigate("/");
-   }
-}, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log(handleValidation());
+  
     if (handleValidation()) {
-      console.log("in validation", loginRoute);
       const { password, username } = values;
       const { data } = await axios.post(loginRoute, {
         username,
         password,
       });
-      if (data.status===false){
-        toast.error(data.msg,toastOptions)
+  
+      if (data.status === false) {
+        // Incorrect password handling, for example, showing an error toast
+        toast.error(data.msg, toastOptions);
       }
-      if (data.status===true){
-        localStorage.setItem('chat-app-user',JSON.stringify(data.user));
+  
+      if (data.status === true) {
+        // If the password is correct, perform the necessary actions
+        localStorage.setItem('chat-app-user', JSON.stringify(data.user));
         navigate("/");
       }
-      
     }
   };
+  
 
   const handleValidation = (event) => {
     const { password, username } = values;
 
     if (password === "") {
-      toast.error("Password is required.", {
-        position: "bottom-right",
-        autoClose: 8000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
+      toast.error("Password is required.", toastOptions);
       return false;
     }
 
-    if (username === "") {
-      toast.error("Username is required.", {
-        position: "bottom-right",
-        autoClose: 8000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
-      return false;
-    }
-   
     if (username.length === "") {
-      toast.error("Email and Password is required", {
-        position: "bottom-right",
-        autoClose: 8000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
+      toast.error("Username is required.", toastOptions);
       return false;
-    
-    } else if (password === "") {
-      toast.error("Email and Password is required", {
-        position: "bottom-right",
-        autoClose: 8000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
-      return false;
-    }
+    } 
 
     // If all validations pass, submit the registration form
     
-    toast.success("Registration successful !", {
-      position: "bottom-right",
-      autoClose: 8000,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "dark",
-    });
+    // toast.success("Login successful !", toastOptions);
     return true;
   
   };
@@ -128,18 +87,18 @@ useEffect(() => {
             onChange={(e) => handleChange(e)}
             min="3"
           />
-          
+         
           <input
             type="password"
             placeholder="Password"
             name="password"
             onChange={(e) => handleChange(e)}
           />
-          
-          <button type="submit">Login In</button>
+         
+          <button type="submit">Log In</button>
 
           <span>
-            Don't have an account? <Link to="/register">Register</Link>
+            Don't have an account? <Link to="/register"> Register </Link>
           </span>
         </form>
       </FormContainer>
