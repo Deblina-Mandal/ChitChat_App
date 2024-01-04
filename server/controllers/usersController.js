@@ -1,5 +1,6 @@
 const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
+
 module.exports.register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
@@ -52,7 +53,7 @@ module.exports.getAllUsers = async (req, res, next) => {
       "avtarImage",
       "_id",
     ]);
-    retur;
+    return res.json(users);
   } catch (ex) {
     next(ex);
   }
