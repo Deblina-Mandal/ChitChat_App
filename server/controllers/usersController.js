@@ -44,16 +44,16 @@ module.exports.login = async (req, res, next) => {
   }
 };
 
-module.exports.getAllUsers = async (req, res, next) => {
-  try {
-    const users = await User.find({ _id: { $ne: req.params.id } }).select([
-      "email",
-      "username",
-      "avtarImage",
-      "_id",
-    ]);
-    retur;
-  } catch (ex) {
-    next(ex);
-  }
-};
+// module.exports.getAllUsers = async (req, res, next) => {
+//   try {
+//     const users = await User.find({ _id: { $ne: req.params.id } }).select([
+//       "email",
+//       "username",
+//       "avtarImage",
+//       "_id",
+//     ]);
+//     retur;
+//   } catch (ex) {
+//     next(ex);
+//   }
+// };
