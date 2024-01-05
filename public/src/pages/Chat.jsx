@@ -7,17 +7,18 @@ import Contacts from "../components/Contacts";
 
 
 function Chat() {
-  const navigate = useNavigate();
-  const [contacts, setContacts] = useState([]);
-  const [currentUser, setCurrentUser] = useState(undefined);
+  // const navigate = useNavigate();
+  // const [contacts, setContacts] = useState([]);
+  // const [currentUser, setCurrentUser] = useState(undefined);
   
-  useEffect(async () => {
-    if (!localStorage.getItem("chat-app-user")) {
-      navigate("/login");
-    } else {
-      setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
-    }
-  }, []);
+  // useEffect(async () => {
+  //   if (!localStorage.getItem("chat-app-user")) {
+  //     navigate("/login");
+  //   } else {
+  //     setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+  //   }
+  // }, []);
+
   // useEffect(async () => {
   //   if (currentUser) {
   //     if (currentUser.isAvatarImageSet) {
@@ -32,7 +33,7 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts contacts={contacts} />
+        {/* <Contacts contacts={contacts} /> */}
       </div>
     </Container>
   );
@@ -49,7 +50,7 @@ const Container = styled.div`
   .container {
     height: 90vh;
     width: 95vw;
-    background-color: #d3cbcb;
+    background-color: #f81010;
     display: grid;
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
