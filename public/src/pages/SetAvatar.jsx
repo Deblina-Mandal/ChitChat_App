@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -10,6 +11,7 @@ import { setAvatarRoute } from "../utils/APIRoutes";
 
 export default function SetAvatar() {
   const api = "https://api.multiavatar.com/45678945";
+
   const navigate = useNavigate();
   const [avatars, setAvatars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +25,7 @@ export default function SetAvatar() {
     theme: "dark",
   };
 
-  const fetchData = async () => {
+ const fetchData = async () => {
     const data = [];
 
     for (let i = 0; i < 4; i++) {
@@ -58,10 +60,12 @@ export default function SetAvatar() {
     checkUser();
   }, []);
   
+
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastOptions);
     } else {
+
       try {
         const user = JSON.parse(localStorage.getItem("chat-app-user"));
         console.log("User ID:", user._id);
@@ -95,11 +99,13 @@ export default function SetAvatar() {
         isLoading ? <Container>
           <img src={loader} alt="loader" className="loader"/>
         </Container>:(
+
         <Container>
           <div className="title-container">
             <h1>Pick an Avatar as your profile picture</h1>
           </div>
           <div className="avatars">
+
             {avatars.map((avatar, index) => (
               <div
                 key={index}
@@ -120,6 +126,7 @@ export default function SetAvatar() {
       }
         <ToastContainer />
       </div>
+
     </>
   );
 }
@@ -130,6 +137,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 3rem;
+
   background-color: #09427a;
   /* #373770; */
   /* #131324; */
@@ -141,6 +149,7 @@ const Container = styled.div`
     /* max-inline-size: 100%; */
 
   }
+
   .title-container {
     h1 {
       color: white;
@@ -149,6 +158,8 @@ const Container = styled.div`
   .avatars {
     display: flex;
     gap: 2rem;
+
+
     .avatar {
       border: 0.4rem solid transparent;
       padding: 0.4rem;
@@ -177,6 +188,7 @@ const Container = styled.div`
     font-size: 1rem;
     text-transform: uppercase;
     &:hover {
+
       background-color: #2492ff;
     }
   }
