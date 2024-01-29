@@ -1,39 +1,55 @@
-import React, { userState, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { allUsersRoute } from "../utils/APIRoutes";
 import Contacts from "../components/Contacts";
-
+import Welcome from "../components/Welcome";
 
 function Chat() {
-  // const navigate = useNavigate();
-  // const [contacts, setContacts] = useState([]);
-  // const [currentUser, setCurrentUser] = useState(undefined);
-  
-  // useEffect(async () => {
-  //   if (!localStorage.getItem("chat-app-user")) {
-  //     navigate("/login");
-  //   } else {
-  //     setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
-  //   }
-  // }, []);
+  const navigate = useNavigate();
+  const [contacts, setContacts] = useState([]);
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentChat, setCurrentChat] = useState(undefined);
 
-  // useEffect(async () => {
-  //   if (currentUser) {
-  //     if (currentUser.isAvatarImageSet) {
-  //       const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-  //       setContacts(data.data);
-  //     } else {
-  //       navigate("/setAvatar");
-  //     }
-  //   }
-  // }, [currentUser]);
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (!localStorage.getItem("chat-app-user")) {
+          navigate("/login");
+        } else {
+          const user = JSON.parse(localStorage.getItem("chat-app-user"));
+          setCurrentUser(user);
+
+          if (user.isAvatarImageSet) {
+            const response = await axios.get(`${allUsersRoute}/${user._id}`);
+            setContacts(response.data);
+          } else {
+            navigate("/setAvatar");
+          }
+        }
+      } catch (error) {
+        // Handle errors, e.g., network issues or server errors
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [navigate]);
+
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  };
+
   return (
     <Container>
       <div className="container">
-        {/* <Contacts contacts={contacts} /> */}
+        <Contacts
+          contacts={contacts}
+          currentUser={currentUser}
+          changeChat={handleChatChange}
+        />
+        <Welcome/>
       </div>
     </Container>
   );
@@ -48,9 +64,9 @@ const Container = styled.div`
   gap: 1rem;
   align-items: center;
   .container {
-    height: 90vh;
-    width: 95vw;
-    background-color: #f81010;
+    height: 100vh;
+    width: 100vw;
+    background-color: #09427a;
     display: grid;
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
@@ -58,4 +74,5 @@ const Container = styled.div`
     }
   }
 `;
+
 export default Chat;
