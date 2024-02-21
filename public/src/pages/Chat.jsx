@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { allUsersRoute } from "../utils/APIRoutes";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
+import ChatContainer from "../components/ChatContainer";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 function Chat() {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,12 +27,12 @@ function Chat() {
           if (user.isAvatarImageSet) {
             const response = await axios.get(`${allUsersRoute}/${user._id}`);
             setContacts(response.data);
+            setIsLoaded(true);
           } else {
             navigate("/setAvatar");
           }
         }
       } catch (error) {
-        // Handle errors, e.g., network issues or server errors
         console.error("Error fetching data:", error);
       }
     };
@@ -37,21 +40,28 @@ function Chat() {
     fetchData();
   }, [navigate]);
 
-  const handleChatChange = (chat) => {
-    setCurrentChat(chat);
+  const handleChatChange = (chatId) => {
+    console.log("Selected chatId:", chatId);
+    setCurrentChat(chatId);
   };
 
   return (
-    <Container>
-      <div className="container">
-        <Contacts
-          contacts={contacts}
-          currentUser={currentUser}
-          changeChat={handleChatChange}
-        />
-        <Welcome/>
-      </div>
-    </Container>
+    <ErrorBoundary>
+      <Container>
+        <div className="container">
+          <Contacts
+            contacts={contacts}
+            currentUser={currentUser}
+            changeChat={handleChatChange}
+          />
+          {isLoaded && currentChat === undefined ? (
+            <Welcome currentUser={currentUser} />
+          ) : (
+            <ChatContainer currentChat={currentChat} currentUser={currentUser} />
+          )}
+        </div>
+      </Container>
+    </ErrorBoundary>
   );
 }
 

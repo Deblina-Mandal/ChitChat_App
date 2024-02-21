@@ -16,7 +16,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
   }, [currentUser]);
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
-    changeChat = contact;
+    changeChat(contact);
   };
   return (
     <>
@@ -43,7 +43,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
                   <div className="avatar">
                     <img
                       src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                      alt="contact"
+                      alt="avatar"
                     />
                   </div>
 
@@ -59,7 +59,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
             <div className="avatar">
               <img
                 src={`data:image/svg+xml;base64,${currentUserImage}`}
-                alt="contact"
+                alt="avatar"
               />
             </div>
 
