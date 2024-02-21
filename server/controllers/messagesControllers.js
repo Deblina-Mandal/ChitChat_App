@@ -1,4 +1,4 @@
-const messageModel = require("../model/messageModel");
+/*const messageModel = require("../model/messageModel");
 
 module.exports.addMessage = async (req, res, next) => {
     try {
@@ -35,4 +35,4 @@ module.exports.getAllMessage = async (req, res, next) => {
     } catch (ex) {
         next(ex);
     }
-};
+}; */

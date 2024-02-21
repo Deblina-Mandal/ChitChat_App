@@ -14,47 +14,52 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
       setCurrentUserName(currentUser.username);
     }
   }, [currentUser]);
+
+  
+  useEffect(() => {
+    console.log("Contacts:", contacts);
+  }, [contacts]);
+
+
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
   };
+
   return (
     <>
       {currentUserImage && currentUserName && (
         <Container>
           <div className="brand">
-            <img className="brand-img"
+            <img
+              className="brand-img"
               src={logo}
               alt="logo"
             />
             <h3>ChitChat</h3>
-            <Dropdown/>
+            <Dropdown />
           </div>
           <div className="contacts">
-            {contacts.map((contact, index) => {
-              return (
-                <div
-                  className={`contact ${
-                    index === currentSelected ? "selected" : ""
-                  }`}
-                  key={index}
-                  onClick={() => changeCurrentChat(index, contact)}
-                >
-                  <div className="avatar">
-                    <img
-                      src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                      alt="avatar"
-                    />
-                  </div>
-
-                  <div className="username">
-                    <h3>{contact.username}</h3>
-                  </div>
+            {contacts.map((contact, index) => (
+              <div
+                className={`contact ${
+                  index === currentSelected ? "selected" : ""
+                }`}
+                key={index}
+                onClick={() => changeCurrentChat(index, contact)}
+              >
+                <div className="avatar">
+                  <img
+                    src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                    alt="avatar"
+                  />
                 </div>
-              );
-            })}
+                <div className="username">
+                  <h3>{contact.username}</h3>
+                </div>
+              </div>
+            ))}
           </div>
-
           <div className="current-user">
             <div className="avatar">
               <img
@@ -62,7 +67,6 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
                 alt="avatar"
               />
             </div>
-
             <div className="username">
               <h2>{currentUserName}</h2>
             </div>
@@ -72,6 +76,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
     </>
   );
 }
+
 const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 75% 15%;
@@ -80,11 +85,10 @@ const Container = styled.div`
   .brand {
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     gap: 1rem;
     background-color: #ffffffc7;
-    justify-content: space-between; /* Added this line */
-    padding: 0 1.5rem; /* Adjusted padding */
+    justify-content: space-between;
+    padding: 0 1.5rem;
     height: 3rem;
     img {
       height: 2rem;
@@ -94,10 +98,8 @@ const Container = styled.div`
       border-radius: 10px;
     }
     h3 {
-      /* color: white; */
       color: black;
       text-transform: uppercase;
-      
     }
   }
   .contacts {
@@ -157,7 +159,6 @@ const Container = styled.div`
   .current-user {
     background-color: #0470c9df;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     gap: 2rem;
     padding-left: 1.5rem;

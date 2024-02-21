@@ -1,4 +1,4 @@
-const {
+/*const {
     addMessage,
     getAllMessage,
   } = require("../controllers/messagesController");
@@ -10,5 +10,5 @@ const {
   router.post("/getmsg/", getAllMessage);
   
   
-  module.exports = router;
+  module.exports = router; */
   
