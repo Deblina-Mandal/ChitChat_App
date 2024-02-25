@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
@@ -7,21 +8,14 @@ import { BsEmojiSmileFill } from "react-icons/bs";
 export default function ChatInput({ handleSendMsg }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [msg, setMsg] = useState("");
-  const pickerRef = useRef(null);
+  // const pickerRef = useRef(null);
 
   const handleEmojiPickerHideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
-  // const handleEmojiClick = (event, emoji) => {
-  //   console.log(emoji);
-  //   let message = msg;
-  //   message += emoji.emoji;
-  //   setMsg(message);
-  // };
   const handleEmojiClick = (event, emoji) => {
-    let message = msg + emoji.emoji;
-    setMsg(message);
+    setMsg((prevMsg) => prevMsg + emoji.emoji);
   };
 
   const sendChat = (event) => {
@@ -37,11 +31,10 @@ export default function ChatInput({ handleSendMsg }) {
       <div className="button-container">
         <div className="emoji">
           <BsEmojiSmileFill onClick={handleEmojiPickerHideShow} />
-          {/* && pickerRef.current */}
           {showEmojiPicker && (
             <Picker
               className="emoji-picker-react"
-              ref={pickerRef}
+              // ref={pickerRef}
               onEmojiClick={(emoji, event) => handleEmojiClick(event, emoji)}
             />
           )}
@@ -71,15 +64,7 @@ const Container = styled.div`
   padding-right: 1rem;
   padding-top: 0.2rem;
   padding-bottom: 0.3rem;
-  /* height:5rem; */
   gap: 0.2rem;
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #9186f3;
-  }
 
   .button-container {
     display: flex;
@@ -105,12 +90,14 @@ const Container = styled.div`
         border-color: #9186f3;
 
         .emoji-scroll-wrapper::-webkit-scrollbar {
-          background-color: #080420;
           width: 5px;
-          &-thumb {
-            background-color: #9186f3;
-          }
+          background-color: #080420;
         }
+
+        .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
+          background-color: #9186f3;
+        }
+
         .emoji-categories {
           button {
             filter: contrast(0);
@@ -127,17 +114,6 @@ const Container = styled.div`
     }
   }
 
-  .emoji-picker-react .emoji-scroll-wrapper {
-    &::-webkit-scrollbar {
-      width: 5px;
-      background-color: #080420;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #9186f3;
-    }
-  }
-
   .input-container {
     width: 100%;
     height: 70%;
@@ -145,7 +121,6 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    /* background-color: #ffffff34; */
 
     textarea {
       width: 90%;
@@ -185,7 +160,6 @@ const Container = styled.div`
       }
 
       &:focus {
-        outline: none;
         outline: none;
         box-shadow: 0 0 0 2px #5850bb;
         overflow: hidden;
