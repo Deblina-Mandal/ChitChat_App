@@ -5,7 +5,7 @@ export default function Welcome({ currentUser }) {
   return (
     <Container>
       <h1>
-        Welcome!, <span>{currentUser && currentUser.username}</span>
+        Welcome! , <span>{currentUser && currentUser.username}</span>
       </h1>
       <h3>Please select a chat to start messaging!</h3>
     </Container>

@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Logout from "./Logout";
+import Dropdown1 from "./Dropdown1";
 import ChatInput from "./ChatInput";
 import Messages from "./Messages";
 
 export default function ChatContainer({ currentChat }) {
   const [chatMessages, setChatMessages] = useState([]);
 
-  useEffect(() => {
-    const fetchChatMessages = async () => {
-      try {
-        const response = await axios.get(`/api/chat/messages/${currentChat.id}`);
-        setChatMessages(response.data);
-      } catch (error) {
-        console.error("Error fetching chat messages:", error);
-      }
-    };
+  const fetchChatMessages = async () => {
+    try {
+      const response = await axios.get(`/api/chat/messages/${currentChat.id}`);
+      setChatMessages(response.data);
+    } catch (error) {
+      console.error("Error fetching chat messages:", error);
+    }
+  };
 
+  useEffect(() => {
     if (currentChat) {
       fetchChatMessages();
     }
@@ -26,7 +26,9 @@ export default function ChatContainer({ currentChat }) {
   const handleSendMsg = async (msg) => {
     alert(msg);
     try {
-      await axios.post(`/api/chat/messages/${currentChat.id}`, { message: msg });
+      await axios.post(`/api/chat/messages/${currentChat.id}`, {
+        message: msg,
+      });
       fetchChatMessages(); // Refetch the updated messages
     } catch (error) {
       console.error("Error sending message:", error);
@@ -49,7 +51,7 @@ export default function ChatContainer({ currentChat }) {
                 <h3>{currentChat.username}</h3>
               </div>
             </div>
-            <Logout />
+            <Dropdown1 />
           </div>
           <Messages messages={chatMessages} />
           <ChatInput handleSendMsg={handleSendMsg} />
@@ -60,12 +62,18 @@ export default function ChatContainer({ currentChat }) {
 }
 
 const Container = styled.div`
-  padding-top: 1rem;
+  /* padding-top: 1rem; */
+  display: grid;
+  grid-template-rows: 10% 78% 12%;
+  overflow: hidden;
   .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: azure;
+    height: 100%;
     padding: 0 2rem;
+
     .user-details {
       display: flex;
       align-items: center;
@@ -77,7 +85,7 @@ const Container = styled.div`
       }
       .username {
         h3 {
-          color: white;
+          /* color: white; */
         }
       }
     }

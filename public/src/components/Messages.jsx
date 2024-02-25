@@ -8,5 +8,6 @@ export default function Messages() {
 }
 
 const Container = styled.div`
-height: 80%;
+padding:1rem;
+height: 100%;
 `;
