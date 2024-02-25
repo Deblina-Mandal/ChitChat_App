@@ -13,10 +13,14 @@ export default function ChatInput({ handleSendMsg }) {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
+  // const handleEmojiClick = (event, emoji) => {
+  //   console.log(emoji);
+  //   let message = msg;
+  //   message += emoji.emoji;
+  //   setMsg(message);
+  // };
   const handleEmojiClick = (event, emoji) => {
-    console.log(emoji);
-    let message = msg;
-    message += emoji.emoji;
+    let message = msg + emoji.emoji;
     setMsg(message);
   };
 
@@ -33,8 +37,13 @@ export default function ChatInput({ handleSendMsg }) {
       <div className="button-container">
         <div className="emoji">
           <BsEmojiSmileFill onClick={handleEmojiPickerHideShow} />
-          {showEmojiPicker && pickerRef.current && (
-            <Picker ref={pickerRef} onEmojiClick={handleEmojiClick} />
+          {/* && pickerRef.current */}
+          {showEmojiPicker && (
+            <Picker
+              className="emoji-picker-react"
+              ref={pickerRef}
+              onEmojiClick={(emoji, event) => handleEmojiClick(event, emoji)}
+            />
           )}
         </div>
       </div>
@@ -64,6 +73,13 @@ const Container = styled.div`
   padding-bottom: 0.3rem;
   /* height:5rem; */
   gap: 0.2rem;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #9186f3;
+  }
 
   .button-container {
     display: flex;
@@ -80,12 +96,14 @@ const Container = styled.div`
         cursor: pointer;
       }
 
-      .react-emoji-picker {
+      .emoji-picker-react {
         position: absolute;
-        top: -350px;
+        top: -480px;
+        left: -10px;
         background-color: #080420;
         box-shadow: 0 5px 10px #9a86f3;
         border-color: #9186f3;
+
         .emoji-scroll-wrapper::-webkit-scrollbar {
           background-color: #080420;
           width: 5px;
@@ -108,6 +126,18 @@ const Container = styled.div`
       }
     }
   }
+
+  .emoji-picker-react .emoji-scroll-wrapper {
+    &::-webkit-scrollbar {
+      width: 5px;
+      background-color: #080420;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #9186f3;
+    }
+  }
+
   .input-container {
     width: 100%;
     height: 70%;
@@ -128,7 +158,7 @@ const Container = styled.div`
       font-size: 1rem;
       resize: none;
       overflow: hidden;
-      
+
       &::-webkit-scrollbar {
         width: 0.4rem;
         overflow: hidden;
@@ -151,16 +181,15 @@ const Container = styled.div`
       }
       &::selection {
         background-color: #9186f3;
-        overflow:hidden;
+        overflow: hidden;
       }
 
       &:focus {
         outline: none;
         outline: none;
         box-shadow: 0 0 0 2px #5850bb;
-        overflow:hidden;
+        overflow: hidden;
       }
-      
     }
 
     button {
