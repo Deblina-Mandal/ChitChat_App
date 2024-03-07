@@ -4,13 +4,17 @@ import axios from "axios";
 import Dropdown1 from "./Dropdown1";
 import ChatInput from "./ChatInput";
 import Messages from "./Messages";
+import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIRoutes";
 
-export default function ChatContainer({ currentChat }) {
+export default function ChatContainer({ currentChat, currentUser }) {
   const [chatMessages, setChatMessages] = useState([]);
 
   const fetchChatMessages = async () => {
     try {
-      const response = await axios.get(`/api/chat/messages/${currentChat.id}`);
+      const response = await axios.post(getAllMessagesRoute, {
+        from: currentUser?._id,
+        to: currentChat?._id,
+      });
       setChatMessages(response.data);
     } catch (error) {
       console.error("Error fetching chat messages:", error);
@@ -24,15 +28,13 @@ export default function ChatContainer({ currentChat }) {
   }, [currentChat]);
 
   const handleSendMsg = async (msg) => {
-    alert(msg);
-    try {
-      await axios.post(`/api/chat/messages/${currentChat.id}`, {
-        message: msg,
-      });
-      fetchChatMessages(); // Refetch the updated messages
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
+    await axios.post(sendMessageRoute, {
+      from: currentUser._id,
+      to: currentChat._id,
+      message: msg,
+    });
+   
+    fetchChatMessages();
   };
 
   return (
@@ -53,14 +55,27 @@ export default function ChatContainer({ currentChat }) {
             </div>
             <Dropdown1 />
           </div>
-          <Messages messages={chatMessages} />
+
+          <div className="chat-messages">
+            {chatMessages.map((message, index) => (
+              <div key={index}>
+                <div
+                  className={`message ${message.fromSelf ? "sent" : "received"}`}
+                >
+                  <div className="content">
+                    <p>{message.message}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <ChatInput handleSendMsg={handleSendMsg} />
         </Container>
       )}
     </>
   );
 }
-
 const Container = styled.div`
   /* padding-top: 1rem; */
   display: grid;
@@ -88,6 +103,39 @@ const Container = styled.div`
           /* color: white; */
         }
       }
+    }
+  }
+  .chat-messages{
+    padding:1rem 2rem;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    overflow:auto;
+    .message{
+      display:flex;
+      align-items:center;
+      .content{
+        max-width:40%;
+        overflow-wrap:break-word;
+        padding:1rem;
+        font-size:1.1rem;
+        border-radius: 1rem;
+        color: black;
+      }
+    }
+  }
+  .sent{
+    justify-content: flex-end;
+    .content{
+      background-color: #d6b2ff;
+    }
+  }
+  .received{
+    justify-content: flex-start;
+    .content{
+      background-color:#fff ;
+      p{color:#000000;}
+      
     }
   }
 `;
