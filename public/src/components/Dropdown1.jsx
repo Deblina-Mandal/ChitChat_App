@@ -39,13 +39,19 @@ const Dropdown1 = () => {
         {isOpen && (
           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a className="dropdown-item" href="#">
-              Action
+              Contact Info
             </a>
             <a className="dropdown-item" href="#">
-              Another action
+              Select Messages
             </a>
             <a className="dropdown-item" href="#">
-              Something else here
+              Clear Chat
+            </a>
+            <a className="dropdown-item" href="#">
+              Delete Chat
+            </a>
+            <a className="dropdown-item" href="#">
+              Block
             </a>
           </div>
         )}

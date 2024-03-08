@@ -2,37 +2,32 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { BiPowerOff } from "react-icons/bi";
+import { IoIosSearch } from "react-icons/io";
 
-
-export default function Logout() {
+export default function SearchText() {
     const navigate = useNavigate();
     const handleClick = async () => {
         localStorage.clear();
-        navigate("/login");
+        navigate("/");
     };
   return (
     
     <Button onClick={handleClick}>
-       <BiPowerOff />
+        <IoIosSearch />
     </Button>
   );
 }
 
 const Button = styled.button`
   display: flex;
-  justify-content: flex-end; /* Align to the right side */
+  justify-content: flex-end; 
   align-items: center;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  background-color: #aee2ed;
-  /* background-color: #3697ab; */
+  background-color: azure;
   border: none;
   cursor: pointer;
 
   svg {
-    font-size: 1rem;
-    /* color: #ebe7ff; */
-    margin-left: auto; /* Move the icon to the right */
+    font-size: 1.8rem;
+    
   }
 `;

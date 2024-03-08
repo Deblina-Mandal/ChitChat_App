@@ -2,19 +2,18 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { BiPowerOff } from "react-icons/bi";
+import { IoIosSearch } from "react-icons/io";
 
-
-export default function Logout() {
+export default function Search() {
     const navigate = useNavigate();
     const handleClick = async () => {
         localStorage.clear();
-        navigate("/login");
+        navigate("/");
     };
   return (
     
     <Button onClick={handleClick}>
-       <BiPowerOff />
+        <IoIosSearch />
     </Button>
   );
 }

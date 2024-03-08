@@ -3,8 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 import Dropdown1 from "./Dropdown1";
 import ChatInput from "./ChatInput";
-import Messages from "./Messages";
 import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIRoutes";
+import SearchText from "./SearchText";
 
 export default function ChatContainer({ currentChat, currentUser }) {
   const [chatMessages, setChatMessages] = useState([]);
@@ -33,7 +33,7 @@ export default function ChatContainer({ currentChat, currentUser }) {
       to: currentChat._id,
       message: msg,
     });
-   
+
     fetchChatMessages();
   };
 
@@ -53,14 +53,20 @@ export default function ChatContainer({ currentChat, currentUser }) {
                 <h3>{currentChat.username}</h3>
               </div>
             </div>
-            <Dropdown1 />
+            <div className="buttons-list">
+              <SearchText/>
+              <Dropdown1 />
+            </div>
+            
           </div>
 
           <div className="chat-messages">
             {chatMessages.map((message, index) => (
               <div key={index}>
                 <div
-                  className={`message ${message.fromSelf ? "sent" : "received"}`}
+                  className={`message ${
+                    message.fromSelf ? "sent" : "received"
+                  }`}
                 >
                   <div className="content">
                     <p>{message.message}</p>
@@ -104,38 +110,69 @@ const Container = styled.div`
         }
       }
     }
+    .buttons-list{
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
   }
-  .chat-messages{
-    padding:1rem 2rem;
-    display:flex;
-    flex-direction:column;
-    gap:1rem;
-    overflow:auto;
-    .message{
-      display:flex;
-      align-items:center;
-      .content{
-        max-width:40%;
-        overflow-wrap:break-word;
-        padding:1rem;
-        font-size:1.1rem;
+  .chat-messages {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.4rem;
+      &-thumb {
+        background-color: #ffffffc8;
+        border-radius: 1rem;
+      }
+    }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px #ffffff39;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px #ffffff39;
+    }
+
+    .message {
+      display: flex;
+      align-items: center;
+      .content {
+        max-width: 40%;
+        overflow-wrap: break-word;
+        padding: 1rem;
+        font-size: 1.1rem;
         border-radius: 1rem;
         color: black;
       }
     }
   }
-  .sent{
+  .sent {
     justify-content: flex-end;
-    .content{
-      background-color: #d6b2ff;
+    .content {
+      /* background-color: #d6b2ff; */
+      /* background-color: #aee2ed; */
+      /* background-color: #c9f8f8; */
+      /* background-color: #5850bb; */
+      /* background-color: #1d0efa;  */
+      /* background-color:#d7b8f3; */
+      background-color: #cdc9fd;
+      /* p{color:white;} */
     }
   }
-  .received{
+  .received {
     justify-content: flex-start;
-    .content{
-      background-color:#fff ;
-      p{color:#000000;}
-      
+    .content {
+      background-color: #fff;
+      p {
+        color: #000000;
+      }
     }
   }
 `;

@@ -65,16 +65,38 @@ const Container = styled.div`
   padding-top: 0.2rem;
   padding-bottom: 0.3rem;
   gap: 0.2rem;
-
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #9186f3;
+  }
+  
   .button-container {
     display: flex;
     align-items: center;
     color: white;
     gap: 1rem;
+    
 
     .emoji {
       position: relative;
+      &::-webkit-scrollbar {
+      width: 0.4rem;
+      &-thumb {
+        background-color: #ffffff39;
+        border-radius: 1rem;
+      }
+    }
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px #ffffff39;
+      border-radius: 10px;
+    }
 
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px #ffffff39;
+    }
       svg {
         font-size: 1.5rem;
         color: #ffff00c8;
@@ -88,7 +110,7 @@ const Container = styled.div`
         background-color: #080420;
         box-shadow: 0 5px 10px #9a86f3;
         border-color: #9186f3;
-
+        
         .emoji-scroll-wrapper::-webkit-scrollbar {
           width: 5px;
           background-color: #080420;

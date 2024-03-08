@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logo from "../assets/chat1.png";
 import Dropdown from "../components/Dropdown";
 import Logout from "./Logout";
+import Search from "./Search";
 
 export default function Contacts({ contacts, currentUser, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -67,7 +68,10 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
                 <h3>{currentUserName}</h3>
               </div>
             </div>
-            <Logout />
+            <div className="button-list">
+              <Search />
+              <Logout />
+            </div>
           </div>
         </Container>
       )}
@@ -108,7 +112,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     overflow: auto;
-    height:100%;
+    height: 100%;
     gap: 0.8rem;
     padding-top: 1rem;
     &::-webkit-scrollbar {
@@ -164,7 +168,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 2rem;
-    padding-left: 1.5rem;
+    padding-left: 2rem;
     padding-right: 1.5rem;
     justify-content: space-between;
     /* height:5rem; */
@@ -194,6 +198,15 @@ const Container = styled.div`
           }
         }
       }
+    }
+    .button-list {
+      background-color: #5850bb;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      /* padding-left: 1.5rem; */
+      padding-right: 1rem;
+      justify-content: space-between;
     }
   }
 `;
