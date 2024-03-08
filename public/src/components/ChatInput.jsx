@@ -77,7 +77,6 @@ const Container = styled.div`
     align-items: center;
     color: white;
     gap: 1rem;
-    
 
     .emoji {
       position: relative;

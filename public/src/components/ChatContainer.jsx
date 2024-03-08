@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Dropdown1 from "./Dropdown1";
 import ChatInput from "./ChatInput";
 import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIRoutes";
 import SearchText from "./SearchText";
+import {v4 as uuidv4} from 'uuid';
 
-export default function ChatContainer({ currentChat, currentUser }) {
+export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [chatMessages, setChatMessages] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const scrollRef = useRef();
 
   const fetchChatMessages = async () => {
     try {
@@ -35,8 +38,31 @@ export default function ChatContainer({ currentChat, currentUser }) {
     });
 
     fetchChatMessages();
+    socket.current.emit("send-msg", {
+      to: currentChat._id,
+      from: currentUser._id,
+      message: msg,
+    });
+    const msgs = [...chatMessages];
+    msgs.push({ fromSelf: true, message: msg });
+    setChatMessages(msgs);
   };
 
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-receive", (msg) => {
+        setArrivalMessage({ fromSelf: false, message: msg });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage && setChatMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" ,block: "end"});
+  }, [chatMessages]);
   return (
     <>
       {currentChat && (
@@ -54,15 +80,14 @@ export default function ChatContainer({ currentChat, currentUser }) {
               </div>
             </div>
             <div className="buttons-list">
-              <SearchText/>
+              <SearchText />
               <Dropdown1 />
             </div>
-            
           </div>
 
           <div className="chat-messages">
             {chatMessages.map((message, index) => (
-              <div key={index}>
+              <div ref={scrollRef} key={uuidv4()}>
                 <div
                   className={`message ${
                     message.fromSelf ? "sent" : "received"
@@ -110,7 +135,7 @@ const Container = styled.div`
         }
       }
     }
-    .buttons-list{
+    .buttons-list {
       display: flex;
       align-items: center;
       gap: 1rem;
