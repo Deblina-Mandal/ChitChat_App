@@ -84,6 +84,7 @@ const Container = styled.div`
   grid-template-rows: 10% 78% 12%;
   overflow: hidden;
   background-color: #251b5b;
+  
   .brand {
     display: flex;
     align-items: center;
@@ -113,6 +114,7 @@ const Container = styled.div`
     align-items: center;
     overflow: auto;
     height: 100%;
+    /* width:100%; */
     gap: 0.8rem;
     padding-top: 1rem;
     &::-webkit-scrollbar {
@@ -168,8 +170,8 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 2rem;
-    padding-left: 2rem;
-    padding-right: 1.5rem;
+    padding-left: 5%;
+    padding-right: 5%;
     justify-content: space-between;
     /* height:5rem; */
     .user {
@@ -209,4 +211,6 @@ const Container = styled.div`
       justify-content: space-between;
     }
   }
+
+  
 `;
