@@ -34,7 +34,7 @@ To logout, one can click on the logout button at the botton of the contacts besi
 
 ![Screenshot (154)](https://github.com/Deblina-Mandal/ChitChat_App/assets/98173509/d2a07a69-638a-4d2a-a9ab-f0445b056bd3)
 
-Any suggestion or feedback is appreciated. We are working on improving this application furthaer.😊
+Any suggestion or feedback is appreciated. We are working on improving this application further.😊
 
 
 
