@@ -6,9 +6,14 @@
 }
 
 body,button,input{
-  font-family: 'Lobster', cursive;
+  
+  /* font-family: 'Lobster', cursive; */
   font-family: 'Poppins', sans-serif;
-  font-family: 'Young Serif', serif;
+  font-family:  Helvetica, sans-serif;
+  /* font-family: 'Young Serif', serif; */
+  
+  
+  
 }
 
 body{
@@ -16,4 +21,5 @@ body{
   min-width: 100vh;
   overflow: hidden;
   background-color: #09427a;
+  
 }

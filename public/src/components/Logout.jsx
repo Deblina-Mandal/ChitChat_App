@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BiPowerOff } from "react-icons/bi";
 
+
 export default function Logout() {
     const navigate = useNavigate();
     const handleClick = async () => {
@@ -11,6 +12,7 @@ export default function Logout() {
         navigate("/login");
     };
   return (
+    
     <Button onClick={handleClick}>
        <BiPowerOff />
     </Button>
@@ -23,13 +25,14 @@ const Button = styled.button`
   align-items: center;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  background-color: #3697ab;
+  background-color: #aee2ed;
+  /* background-color: #3697ab; */
   border: none;
   cursor: pointer;
 
   svg {
-    font-size: 1.3rem;
-    color: #ebe7ff;
+    font-size: 1rem;
+    /* color: #ebe7ff; */
     margin-left: auto; /* Move the icon to the right */
   }
 `;
