@@ -10,7 +10,7 @@
 
 **The loading animation:**
 
-![Screenshot (147)](https://github.com/Deblina-Mandal/ChitChat_App/assets/98173509/4532e942-866f-4516-bbd1-73da5b6af633)
+![Screenshot (148)](https://github.com/Deblina-Mandal/ChitChat_App/assets/98173509/360f80e2-328f-4943-b0a0-a93713e2556f)
 
 **The Set Avatar page:**
 
