@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ThreeDotsImage from "../assets/three-dots.png";
-
+import { Link } from "react-router-dom";
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -38,14 +38,15 @@ const Dropdown = () => {
         />
         {isOpen && (
           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <Link className="dropdown-item" to="/SetAvatar"> Change profile photo </Link>
             <a className="dropdown-item" href="#">
-              Action
+              Search
             </a>
             <a className="dropdown-item" href="#">
-              Another action
+              Settings
             </a>
             <a className="dropdown-item" href="#">
-              Something else here
+              Logout
             </a>
           </div>
         )}

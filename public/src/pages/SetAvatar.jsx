@@ -188,7 +188,6 @@ const Container = styled.div`
     font-size: 1rem;
     text-transform: uppercase;
     &:hover {
-
       background-color: #2492ff;
     }
   }
