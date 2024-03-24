@@ -30,7 +30,7 @@ Stylish Emoji keyboard with skin tone selection:
 
 ![Screenshot (153)](https://github.com/Deblina-Mandal/ChitChat_App/assets/98173509/25d38910-ed37-4912-a824-037c875d4475)
 
-To logout, one can click on the logout button at the botton of the contacts beside the user's name. There are other functionalities in the dropdow as well.
+To logout, one can click on the logout button at the botton of the contacts beside the user's name. There are other functionalities in the dropdown as well.
 
 ![Screenshot (154)](https://github.com/Deblina-Mandal/ChitChat_App/assets/98173509/d2a07a69-638a-4d2a-a9ab-f0445b056bd3)
 
