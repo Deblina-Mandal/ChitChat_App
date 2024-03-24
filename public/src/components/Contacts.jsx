@@ -36,25 +36,27 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
             <Dropdown />
           </div>
           <div className="contacts">
-            {contacts.map((contact, index) => (
-              <div
-                className={`contact ${
-                  index === currentSelected ? "selected" : ""
-                }`}
-                key={index}
-                onClick={() => changeCurrentChat(index, contact)}
-              >
-                <div className="avatar">
-                  <img
-                    src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                    alt="avatar"
-                  />
+            {contacts
+              .filter((contact) => contact.username !== currentUserName) // Filter out the current user's contact
+              .map((contact, index) => (
+                <div
+                  className={`contact ${
+                    index === currentSelected ? "selected" : ""
+                  }`}
+                  key={index}
+                  onClick={() => changeCurrentChat(index, contact)}
+                >
+                  <div className="avatar">
+                    <img
+                      src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                      alt="avatar"
+                    />
+                  </div>
+                  <div className="username">
+                    <h3>{contact.username}</h3>
+                  </div>
                 </div>
-                <div className="username">
-                  <h3>{contact.username}</h3>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
           <div className="current-user">
             <div className="user">
@@ -78,7 +80,6 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
     </>
   );
 }
-
 const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 78% 12%;
