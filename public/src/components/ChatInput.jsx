@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
@@ -8,7 +7,6 @@ import { BsEmojiSmileFill } from "react-icons/bs";
 export default function ChatInput({ handleSendMsg }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [msg, setMsg] = useState("");
-  // const pickerRef = useRef(null);
 
   const handleEmojiPickerHideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
@@ -26,6 +24,13 @@ export default function ChatInput({ handleSendMsg }) {
     }
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      sendChat(event);
+    }
+  };
+
   return (
     <Container>
       <div className="button-container">
@@ -34,7 +39,6 @@ export default function ChatInput({ handleSendMsg }) {
           {showEmojiPicker && (
             <Picker
               className="emoji-picker-react"
-              // ref={pickerRef}
               onEmojiClick={(emoji, event) => handleEmojiClick(event, emoji)}
             />
           )}
@@ -46,15 +50,15 @@ export default function ChatInput({ handleSendMsg }) {
           placeholder="Type your message here"
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
+          onKeyDown={handleKeyPress} // Add keydown event listener
         />
-        <button className="submit">
+        <button className="submit" type="submit">
           <IoMdSend />
         </button>
       </form>
     </Container>
   );
 }
-
 const Container = styled.div`
   display: grid;
   grid-template-columns: 5% 95%;
