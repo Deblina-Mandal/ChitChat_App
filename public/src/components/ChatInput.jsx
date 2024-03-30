@@ -7,13 +7,22 @@ import { BsEmojiSmileFill } from "react-icons/bs";
 export default function ChatInput({ handleSendMsg }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [msg, setMsg] = useState("");
+  const textareaRef = useRef(null); // Ref for the textarea element
 
   const handleEmojiPickerHideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
+    // Focus the textarea when emoji picker is shown
+    if (!showEmojiPicker && textareaRef.current) {
+      textareaRef.current.focus();
+    }
   };
 
   const handleEmojiClick = (event, emoji) => {
     setMsg((prevMsg) => prevMsg + emoji.emoji);
+    // Focus the textarea after clicking an emoji
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
   };
 
   const sendChat = (event) => {
@@ -46,11 +55,12 @@ export default function ChatInput({ handleSendMsg }) {
       </div>
       <form className="input-container" onSubmit={(e) => sendChat(e)}>
         <textarea
+          ref={textareaRef} // Assign the ref to the textarea element
           type="text"
           placeholder="Type your message here"
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
-          onKeyDown={handleKeyPress} // Add keydown event listener
+          onKeyDown={handleKeyPress}
         />
         <button className="submit" type="submit">
           <IoMdSend />
@@ -59,6 +69,7 @@ export default function ChatInput({ handleSendMsg }) {
     </Container>
   );
 }
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: 5% 95%;
